@@ -28,10 +28,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               MaterialButton(color: Colors.red,onPressed: ()=> Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => CategoriesScreen())),
                     child: Text('Cancel')),
-              MaterialButton(color: Colors.lightBlueAccent,onPressed: (){
+              MaterialButton(color: Colors.lightBlueAccent,onPressed: () async{
                 _category.name = _categoryNameController.text;
                 _category.description = _categoryDescriptionController.text;
-                _categoryService.saveCategory(_category);
+
+                var result = await _categoryService.saveCategory(_category);
+                print(result);
               }, child: Text('Save')),
             ],
             title: Text('Categories Form'),
