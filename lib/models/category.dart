@@ -1,17 +1,15 @@
+class Category {
+  late int id = 1;
+  late String name;
+  late String description;
 
-class Category{
-    late int id;
-    late String name;
-    late String description;
+  Map<String, dynamic> toMap() {
+    var mapping = <String, dynamic>{
+      'id': id,
+      'name': name,
+      'description': description,
+    };
 
-  categoryMap(){
-      var mapping = Map<String, Object>();
-      if(id != null){
-        mapping['id']= id;
-      }
-      mapping['name']= name;
-      mapping['description']= description;
-
-      return mapping;
-   }
+    return mapping;
+  }
 }

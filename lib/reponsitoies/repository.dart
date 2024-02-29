@@ -10,10 +10,10 @@ class Repository{
    _databaseConnection = DatabaseConnection();
   }
 
-  late Database _database;
+  static Database? _database;
 
   //check if database is exits or not
-  Future<Database> get database async{
+  Future<Database?> get database async{
     if(_database != null) return _database;
     _database = await _databaseConnection.setDatabase();
     return _database;
@@ -21,6 +21,6 @@ class Repository{
   //inserting data to table
   insertData(table, data) async{
     var connection = await database;
-    return await connection.insert(table, data);
+    return await connection?.insert(table, data);
   }
 }
