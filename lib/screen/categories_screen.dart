@@ -20,11 +20,25 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
   var id = 1;
 
-  // List<Category> _categoryList =  List<Category>();
-
+  List<Category> _categoryList = <Category>[];
+  @override
+  void initState(){
+    super.initState();
+    getAllCategories();
+  }
   getAllCategories() async{
-    // _categoryList = List<Category>();
+    _categoryList = <Category>[];
     var categories = await _categoryService.readCategory();
+    categories.forEach((_category){
+        setState(() {
+          var categoryModel = Category();
+          categoryModel.name = _category['name'];
+          categoryModel.description = _category['description'];
+          categoryModel.id = _category['id'];
+          _categoryList.add(categoryModel);
+
+        });
+    });
   }
 
 
@@ -86,7 +100,24 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         backgroundColor: Colors.lightBlueAccent,
         foregroundColor: Colors.white, //làm màu chữ title Categories
       ),
-      body: Center(child: Text('Danh mục Categories')),
+      body: ListView.builder(itemCount: _categoryList.length,itemBuilder: (context, index){
+          return Padding(
+            padding:  EdgeInsets.only(top: 4.0,left: 16.0,right: 16.0),
+            child: Card(
+              child: ListTile(
+                leading: IconButton(icon: Icon(Icons.edit),onPressed: (){}),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(_categoryList[index].name),
+                    IconButton(icon: Icon(Icons.delete,color: Colors.red,),onPressed: (){})
+                  ],
+                ),
+                subtitle: Text(_categoryList[index].description),
+              ),
+            ),
+          );
+      }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _showFormDialog(context);
