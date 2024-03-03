@@ -18,6 +18,16 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   var _category = Category();
   var _categoryService = CategoryService();
 
+  var id = 1;
+
+  // List<Category> _categoryList =  List<Category>();
+
+  getAllCategories() async{
+    // _categoryList = List<Category>();
+    var categories = await _categoryService.readCategory();
+  }
+
+
   _showFormDialog(BuildContext context) {
     return showDialog(
         context: context,
@@ -29,6 +39,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   .push(MaterialPageRoute(builder: (context) => CategoriesScreen())),
                     child: Text('Cancel')),
               MaterialButton(color: Colors.lightBlueAccent,onPressed: () async{
+                _category.id = id++;
                 _category.name = _categoryNameController.text;
                 _category.description = _categoryDescriptionController.text;
 

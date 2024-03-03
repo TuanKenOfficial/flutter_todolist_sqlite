@@ -20,7 +20,9 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
           UserAccountsDrawerHeader(
           currentAccountPicture: CircleAvatar(
               backgroundImage: NetworkImage(
-              'https://scontent.fsgn5-10.fna.fbcdn.net/v/t39.30808-6/428602029_1423540068581636_4729918817390069911_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=efb6e6&_nc_eui2=AeE6uCusDOz-JttinTwqErq5XIubYEtMqDBci5tgS0yoMOvHpwv-R_ze6N83AVSTzLUKqAILZek5GZ3yQBqPwiK0&_nc_ohc=E9XfmA2IEhYAX8LwWvX&_nc_zt=23&_nc_ht=scontent.fsgn5-10.fna&cb_e2o_trans=t&oh=00_AfA0kUa-k5kn1eFJTjHc9y-HlaMKXvoJKUy_riB3zf3NNw&oe=65E08EDE'),
+              'https://scontent.fvca1-2.fna.fbcdn.net/v/t39.30808-6/428602029_1423540068581636_4729918817390069911_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=efb6e6&_nc_eui2=AeE6uCusDOz-JttinTwqErq5XIubYEtMqDBci5tgS0yoMOvHpwv-R_ze6N83AVSTzLUKqAILZek5GZ3yQBqPwiK0&_nc_ohc=wSpSJ0hvBi0AX-993Ud&_nc_ht=scontent.fvca1-2.'
+                  'fna&cb_e2o_trans=t&oh=00_AfCZDE8AJHrsDPUkmhR-8yn6OtJS19kkYbaxvcjqT83B9w&oe=65E877DE'
+              ),
         ),
           accountName: Text('Vĩ Khang'),
           accountEmail: Text('admin@gmail.com'),

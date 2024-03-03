@@ -8,7 +8,13 @@ class  CategoryService{
    CategoryService(){
     _repository = Repository();
    }
+  //create data
   saveCategory(Category category) async{
     return await _repository.insertData('categories', category.toMap());
+  }
+
+  //Read data
+  readCategory() async{
+     _repository.readData('categories');
   }
 }
