@@ -17,10 +17,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
   var _category = Category();
   var _categoryService = CategoryService();
+  var id = 1; // xử lý id ở đây
 
-  var id = 1;
 
   List<Category> _categoryList = <Category>[];
+
   @override
   void initState(){
     super.initState();
@@ -49,7 +50,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         builder: (param) {
           return AlertDialog(
             actions: <Widget>[
-              MaterialButton(color: Colors.red,onPressed: ()=> Navigator.of(context)
+              MaterialButton(color: Colors.red,onPressed: () => Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => CategoriesScreen())),
                     child: Text('Cancel')),
               MaterialButton(color: Colors.lightBlueAccent,onPressed: () async{
