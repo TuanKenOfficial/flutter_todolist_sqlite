@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todosqliteapp/helpers/drawer_navigation.dart';
+import 'package:todosqliteapp/screen/todo_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,6 +18,10 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.yellow,
       ),
       drawer: DrawerNavigation(),
+      floatingActionButton: FloatingActionButton(onPressed: () =>Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) =>TodoScreen()))
+        ,child: Icon(Icons.add),
+      ),
     );
   }
 }

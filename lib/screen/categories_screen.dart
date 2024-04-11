@@ -74,7 +74,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 var result = await _categoryService.saveCategory(_category);
                 if(result>0){
                   print(result);
-                  Navigator.of(context);
+                  Navigator.pop(context);
                   getAllCategories();
                 }
               }, child: Text('Save')),
@@ -112,7 +112,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             actions: <Widget>[
               MaterialButton(color: Colors.red,onPressed: () => Navigator.pop(context),
                   child: Text('Cancel')),
-              MaterialButton(color: Colors.lightBlueAccent,onPressed: () async{
+              MaterialButton(color: Colors.blueAccent,onPressed: () async{
                 _category.id = category[0]['id'];
                 _category.name = _editCategoryNameController.text;
                 _category.description = _editCategoryDescriptionController.text;
@@ -122,7 +122,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   print(_category.id);
                   Navigator.pop(context);
                   getAllCategories();
-                  _showSuccessSnackBar(Text('Update'));
+                  _showSuccessSnackBar(Text('Updated'));
                 }
               }, child: Text('Update')),
             ],
@@ -148,7 +148,30 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           );
         });
   }
-
+  //delete
+  _deleteFormDialog(BuildContext context, categoryId) {
+    return showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (param) {
+          return AlertDialog(
+            actions: <Widget>[
+              MaterialButton(color: Colors.green,onPressed: () => Navigator.pop(context),
+                  child: Text('Cancel')),
+              MaterialButton(color: Colors.red,onPressed: () async{
+                var result = await _categoryService.deleteCategory(categoryId);
+                if(result>0){
+                  print(categoryId);
+                  Navigator.pop(context);
+                  getAllCategories();
+                  _showSuccessSnackBar(Text('Deleted'));
+                }
+              }, child: Text('Delete')),
+            ],
+            title: Text('Are you sure you want to delete this?'),
+          );
+        });
+  }
   // hiển thị thông báo message
   _showSuccessSnackBar(message){
     var _snackBar = SnackBar(content: message);
@@ -183,7 +206,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(_categoryList[index].name),
-                    IconButton(icon: Icon(Icons.delete,color: Colors.red,),onPressed: (){})
+                    IconButton(icon: Icon(Icons.delete,color: Colors.red,),onPressed: (){
+                      _deleteFormDialog(context, _categoryList[index].id);
+                    })
                   ],
                 ),
                 subtitle: Text(_categoryList[index].description),
