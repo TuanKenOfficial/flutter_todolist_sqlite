@@ -5,6 +5,7 @@ class Category {
 
 
   Map<String, dynamic> toMap() {
+
     var mapping = <String, dynamic>{
       'id': id,
       'name': name,

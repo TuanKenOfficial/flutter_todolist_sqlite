@@ -30,6 +30,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     super.initState();
     getAllCategories();
   }
+
+//load danh sách
   getAllCategories() async{
     _categoryList = <Category>[];
     var categories = await _categoryService.readCategory();
@@ -44,6 +46,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         });
     });
   }
+  //edit
   _editCategory(BuildContext context, categoryId) async {
     category = await _categoryService.readCategoryById(categoryId);
     setState(() {
@@ -53,7 +56,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     _editFormDialog(context);
   }
 
-
+  //insert
   _showFormDialog(BuildContext context) {
     return showDialog(
         context: context,
@@ -63,15 +66,16 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             actions: <Widget>[
               MaterialButton(color: Colors.red,onPressed: () => Navigator.pop(context),
                     child: Text('Cancel')),
-              MaterialButton(color: Colors.lightBlueAccent,onPressed: () async{
-                _category.id = id++;
+              MaterialButton(color: Colors.lightBlueAccent,onPressed: () async {
+                 _category.id = id++;
                 _category.name = _categoryNameController.text;
                 _category.description = _categoryDescriptionController.text;
 
                 var result = await _categoryService.saveCategory(_category);
                 if(result>0){
                   print(result);
-                  Navigator.pop(context);
+                  Navigator.of(context);
+                  getAllCategories();
                 }
               }, child: Text('Save')),
             ],
@@ -97,6 +101,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           );
         });
   }
+
+  //update
   _editFormDialog(BuildContext context) {
     return showDialog(
         context: context,
@@ -113,9 +119,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
                 var result = await _categoryService.updateCategory(_category);
                 if(result>0){
-                  // print(result);
+                  print(_category.id);
                   Navigator.pop(context);
                   getAllCategories();
+                  _showSuccessSnackBar(Text('Update'));
                 }
               }, child: Text('Update')),
             ],
@@ -142,6 +149,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         });
   }
 
+  // hiển thị thông báo message
+  _showSuccessSnackBar(message){
+    var _snackBar = SnackBar(content: message);
+    ScaffoldMessenger.of(context).showSnackBar(_snackBar);
+    // _globalKey.currentState!.showSnackBar(_snackBar);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
