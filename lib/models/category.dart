@@ -4,18 +4,20 @@ class Category {
   late String description;
 
 
-  Map<String, dynamic> toMap() {
-
-    var mapping = <String, dynamic>{
-      'id': id,
-      'name': name,
-      'description': description,
-    };
-    return mapping;
-  }
+  // Map<String, dynamic> toMap() {
+  //
+  //   var mapping = <String, dynamic>{
+  //     'id': id,
+  //     'name': name,
+  //     'description': description,
+  //   };
+  //   return mapping;
+  // }
   CategoryMap(){
     var mapping = Map<String,dynamic>();
-    mapping['id']=id;
+    if(id != null){
+      mapping['id']=id;
+    }
     mapping['name']=name;
     mapping['description']=description;
 

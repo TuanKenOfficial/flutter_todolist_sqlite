@@ -67,7 +67,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               MaterialButton(color: Colors.red,onPressed: () => Navigator.pop(context),
                     child: Text('Cancel')),
               MaterialButton(color: Colors.lightBlueAccent,onPressed: () async {
-                 _category.id = id++;
+                if(id != null){
+                  _category.id = id++;
+                }
+
                 _category.name = _categoryNameController.text;
                 _category.description = _categoryDescriptionController.text;
 
