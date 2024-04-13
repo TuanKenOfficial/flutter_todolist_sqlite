@@ -19,17 +19,23 @@ class  TodoService{
      return await _repository.readData('todos');
   }
 
-  //read data from table by Id
-  readTodoById(todoId) async {
-    return await _repository.readDataById('todos', todoId);
+  //read todos by category
+  readTodoByCategory(category) async {
+     return await _repository.readDataByColumnName('todos', 'category', category);
   }
 
-  //update data from table
-  updateTodo(Todo todo) async {
-     return await _repository.updateData('todos',todo.TodoMap());
-  }
-
-  deleteTodo(todoId) async {
-    return await _repository.deleteData('todos', todoId);
-  }
+  // //read data from table by Id
+  // readTodoById(todoId) async {
+  //   return await _repository.readDataById('todos', todoId);
+  // }
+  //
+  // //update data from table
+  // updateTodo(Todo todo) async {
+  //    return await _repository.updateData('todos',todo.TodoMap());
+  // }
+  //
+  // //delete
+  // deleteTodo(todoId) async {
+  //   return await _repository.deleteData('todos', todoId);
+  // }
 }

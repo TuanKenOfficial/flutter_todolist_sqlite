@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:todosqliteapp/screen/categories_screen.dart';
 import 'package:todosqliteapp/screen/home_screen.dart';
+import 'package:todosqliteapp/screen/todo_by_category.dart';
+import 'package:todosqliteapp/services/category_service.dart';
 
 class DrawerNavigation extends StatefulWidget {
   const DrawerNavigation({super.key});
@@ -11,6 +13,32 @@ class DrawerNavigation extends StatefulWidget {
 }
 
 class _DrawerNavigationState extends State<DrawerNavigation> {
+  List<Widget> _categoryList = <Widget>[];
+
+  CategoryService _categoryService = CategoryService();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getAllCategories();
+  }
+  getAllCategories()  async {
+    var categories = await _categoryService.readCategory();
+
+    categories.forEach((category){
+      setState(() {
+        _categoryList.add(InkWell(
+          onTap: () => Navigator.push(
+              context, MaterialPageRoute(
+              builder: (context) => new TodoByCategory(category: category['name'],))),
+            child: ListTile(
+              title: Text(category['name']),
+            ),
+        ));
+      });
+    });
+
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,10 +72,15 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => CategoriesScreen())),
             ),
-
+            Divider(),
+            Column(
+              children: _categoryList,
+            ),
           ],
         ),
       ),
     );
   }
+
+
 }

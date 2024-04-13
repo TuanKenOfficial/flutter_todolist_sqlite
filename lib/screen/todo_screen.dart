@@ -20,7 +20,7 @@ class _TodoScreenState extends State<TodoScreen> {
   var _selectedValue;
 
   var _categories = <DropdownMenuItem>[];
-  var id = 1; // xử lý id tại đây
+  var id =1; // xử lý id tại đây
 
   @override
   void initState(){
