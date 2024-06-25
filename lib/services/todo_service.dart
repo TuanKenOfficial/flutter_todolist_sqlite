@@ -34,8 +34,8 @@ class  TodoService{
   //    return await _repository.updateData('todos',todo.TodoMap());
   // }
   //
-  // //delete
-  // deleteTodo(todoId) async {
-  //   return await _repository.deleteData('todos', todoId);
-  // }
+  //delete
+  deleteTodo(todoId) async {
+    return await _repository.deleteData('todos', todoId);
+  }
 }

@@ -65,7 +65,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           return AlertDialog(
             actions: <Widget>[
               MaterialButton(color: Colors.red,onPressed: () => Navigator.pop(context),
-                    child: Text('Cancel')),
+                    child: Text('Hủy')),
               MaterialButton(color: Colors.lightBlueAccent,onPressed: () async {
                 if(id != null){
                   _category.id = id++;
@@ -80,23 +80,23 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   Navigator.pop(context);
                   getAllCategories();
                 }
-              }, child: Text('Save')),
+              }, child: Text('Lưu')),
             ],
-            title: Text('Categories Form'),
+            title: Text('Danh mục'),
             content: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
                   TextField(
                     controller: _categoryNameController,
                     decoration: InputDecoration(
-                        hintText: 'Write a category',
-                        labelText: 'Category'),
+                        hintText: 'Viết tên danh mục ',
+                        labelText: 'Danh mục'),
                   ),
                   TextField(
                     controller: _categoryDescriptionController,
                     decoration: InputDecoration(
-                        hintText: 'Write a description',
-                        labelText: 'Description Category'),
+                        hintText: 'Viết mô tả',
+                        labelText: 'Mô tả danh mục'),
                   )
                 ],
               ),
@@ -114,7 +114,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           return AlertDialog(
             actions: <Widget>[
               MaterialButton(color: Colors.red,onPressed: () => Navigator.pop(context),
-                  child: Text('Cancel')),
+                  child: Text('Hủy')),
               MaterialButton(color: Colors.blueAccent,onPressed: () async{
                 _category.id = category[0]['id'];
                 _category.name = _editCategoryNameController.text;
@@ -125,25 +125,25 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   print(_category.id);
                   Navigator.pop(context);
                   getAllCategories();
-                  _showSuccessSnackBar(Text('Updated'));
+                  _showSuccessSnackBar(Text('Cập nhật thành công'));
                 }
-              }, child: Text('Update')),
+              }, child: Text('Cập nhật')),
             ],
-            title: Text('Edit Categories Form'),
+            title: Text('Chỉnh sửa danh mục'),
             content: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
                   TextField(
                     controller: _editCategoryNameController,
                     decoration: InputDecoration(
-                        hintText: 'Write a category',
-                        labelText: 'Category'),
+                        hintText: 'Viết tên danh mục ',
+                        labelText: 'Danh mục'),
                   ),
                   TextField(
                     controller: _editCategoryDescriptionController,
                     decoration: InputDecoration(
-                        hintText: 'Write a description',
-                        labelText: 'Description Category'),
+                        hintText: 'Viết mô tả',
+                        labelText: 'Mô tả danh mục'),
                   )
                 ],
               ),
@@ -160,18 +160,18 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           return AlertDialog(
             actions: <Widget>[
               MaterialButton(color: Colors.green,onPressed: () => Navigator.pop(context),
-                  child: Text('Cancel')),
+                  child: Text('Hủy')),
               MaterialButton(color: Colors.red,onPressed: () async{
                 var result = await _categoryService.deleteCategory(categoryId);
                 if(result>0){
                   print(categoryId);
                   Navigator.pop(context);
                   getAllCategories();
-                  _showSuccessSnackBar(Text('Deleted'));
+                  _showSuccessSnackBar(Text('Xóa thành công'));
                 }
-              }, child: Text('Delete')),
+              }, child: Text('Xóa')),
             ],
-            title: Text('Are you sure you want to delete this?'),
+            title: Text('Bạn có chắc chắn muốn xóa cái này không?'),
           );
         });
   }
@@ -193,7 +193,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             color: Colors.white,
           ),
         ),
-        title: Text('Categories'),
+        title: Text('Danh mục'),
         backgroundColor: Colors.lightBlueAccent,
         foregroundColor: Colors.white, //làm màu chữ title Categories
       ),

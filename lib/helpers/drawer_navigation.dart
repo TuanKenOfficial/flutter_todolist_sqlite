@@ -60,14 +60,14 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
             ),
             ListTile(
               leading: Icon(Icons.home),
-              title: Text('Home'),
+              title: Text('Trang chủ'),
               onTap: () =>
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => HomeScreen())),
             ),
             ListTile(
               leading: Icon(Icons.view_array),
-              title: Text('Categories'),
+              title: Text('Danh mục'),
               onTap: () =>
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => CategoriesScreen())),

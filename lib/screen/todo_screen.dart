@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todosqliteapp/models/todo.dart';
+import 'package:todosqliteapp/screen/home_screen.dart';
 import 'package:todosqliteapp/services/category_service.dart';
 import 'package:intl/intl.dart';
 import 'package:todosqliteapp/services/todo_service.dart';
@@ -53,12 +54,13 @@ class _TodoScreenState extends State<TodoScreen> {
     }
   }
 
+// hiển thị thông báo message
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create Todo'),
+        title: Text('Tạo công việc, nhiệm vụ'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -68,20 +70,20 @@ class _TodoScreenState extends State<TodoScreen> {
               TextField(
                 controller: _todoTitleController ,
                 decoration: InputDecoration(
-                    labelText: 'Title',
-                    hintText: 'Write Todo Title'
+                    labelText: 'Tiêu đề',
+                    hintText: 'Viết tiêu đề công việc, nhiệm vụ'
                 ),
               ),TextField(
                 controller: _todoDescriptionController ,
                 decoration: InputDecoration(
-                    labelText: 'Description',
-                    hintText: 'Write Todo Description'
+                    labelText: 'Mô tả',
+                    hintText: 'Viết mô tả công việc, nhiệm vụ'
                 ),
               ),TextField(
                 controller: _todoDataController ,
                 decoration: InputDecoration(
-                    labelText: 'Date',
-                    hintText: 'Pick a date',
+                    labelText: 'Ngày viết công việc, nhiệm vụ',
+                    hintText: 'Chọn ngày/tháng/năm',
                     prefixIcon: InkWell(
                       onTap: () {
                         _seletedTodoDate(context);
@@ -93,7 +95,7 @@ class _TodoScreenState extends State<TodoScreen> {
               DropdownButtonFormField(
                   value: _selectedValue,
                   items: _categories,
-                  hint: Text('Category'),
+                  hint: Text('Danh mục'),
                   onChanged: (value){
                     setState(() {
                       _selectedValue = value;
@@ -118,15 +120,25 @@ class _TodoScreenState extends State<TodoScreen> {
                 var result = await _todoService.saveTodo(todoObject);
                 print(result);
                 print(todoObject.id);
+                _showSuccessSnackBar(Text('Lưu thành công'));
+                Navigator.pop(context);
               },
                 color: Colors.grey,
-                child: Text('Save',style: TextStyle(color: Colors.yellow),),)
+                child: Text('Lưu',style: TextStyle(color: Colors.yellow),
+                    ),
+              ),
             ],
           ),
         ),
       ),
     );
   }
+  _showSuccessSnackBar(message){
+    var _snackBar = SnackBar(content: message);
+    ScaffoldMessenger.of(context).showSnackBar(_snackBar);
+    // _globalKey.currentState!.showSnackBar(_snackBar);
+  }
+
 }
 
 

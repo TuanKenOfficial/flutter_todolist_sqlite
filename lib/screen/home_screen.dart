@@ -17,6 +17,8 @@ class _HomeScreenState extends State<HomeScreen> {
   late TodoService _todoService;
   List<Todo> _todoList = <Todo>[];
 
+
+
   @override
   initState(){
     super.initState();
@@ -41,6 +43,35 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     });
   }
+  _deleteFormDialog(BuildContext context, todoId) {
+    return showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (param) {
+          return AlertDialog(
+            actions: <Widget>[
+              MaterialButton(color: Colors.green,onPressed: () => Navigator.pop(context),
+                  child: Text('Hủy')),
+              MaterialButton(color: Colors.red,onPressed: () async{
+                var result = await _todoService.deleteTodo(todoId);
+                if(result>0){
+                  print(todoId);
+                  Navigator.pop(context);
+                  getAllTodos();
+                  _showSuccessSnackBar(Text('Xoá thành công'));
+                }
+              }, child: Text('Xóa')),
+            ],
+            title: Text('Bạn có chắc chắn muốn xóa?'),
+          );
+        });
+  }
+  // hiển thị thông báo message
+  _showSuccessSnackBar(message){
+    var _snackBar = SnackBar(content: message);
+    ScaffoldMessenger.of(context).showSnackBar(_snackBar);
+    // _globalKey.currentState!.showSnackBar(_snackBar);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,14 +91,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(0)
                 ),
                 child: ListTile(
+                  leading:  IconButton(icon: Icon(Icons.delete,color: Colors.red,),onPressed: (){
+                    _deleteFormDialog(context, _todoList[index].id);
+                  }),
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text(_todoList[index].title ?? 'No Title')
+                      Text(_todoList[index].title ?? 'No Title'),
+
                     ],
                   ),
                   subtitle: Text(_todoList[index].category ?? 'No Category'),
                   trailing: Text(_todoList[index].todoDate ?? 'No Date'),
+
                 ),
               ),
             );
